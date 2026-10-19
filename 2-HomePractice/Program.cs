@@ -9,9 +9,45 @@ class Program
         var answer = FourPass(nums);
         Console.WriteLine(answer);
     }
+    public static int SinglePass(int[] array)
+    {
+     if(array == null || array.Length <= 3)
+        throw new Exception("Array must contain at least 4 elements.");
+    int First = int.MinValue;
+    int Second = int.MinValue;
+    int Third = int.MinValue;
+    int Fourth = int.MinValue;
+
+    foreach( var number in array)
+        {
+            if(number > First)
+            {
+                Fourth = Third;
+                Third = Second;
+                Second = First;
+                First = number;
+            }
+            else if(number > Second)
+            {
+                Third = Second;
+                Second = First;
+                First = number;
+            }
+            else if(number > Third)
+            {
+                Second = First;
+                First = number;
+            }
+            else if(number > Third)
+            {
+                First = number;
+            }
+        }
+        return Fourth;
+    }
     public static int FourPass(int[] array)
     {
-        if(array == null || array.Length <= 4)
+     if(array == null || array.Length <= 3)
         throw new Exception("Array must contain at least 4 elements.");
 
         int result = 0;
